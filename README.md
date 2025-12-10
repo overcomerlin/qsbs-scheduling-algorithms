@@ -62,7 +62,7 @@ An enhancement over the standard Placement-Based Allocation (PBA) algorithm.
 
 ## 🛠️ Mathematical Foundations
 
-The code is backed by rigorous analytical modeling (detailed in `[QSBS-scheduling-algorithms.pdf](https://github.com/overcomerlin/qsbs-scheduling-algorithms/blob/main/QSBS-scheduling-algorithms.pdf)`).
+The code is backed by rigorous analytical modeling (detailed in [QSBS-scheduling-algorithms.pdf](https://github.com/overcomerlin/qsbs-scheduling-algorithms/blob/main/QSBS-scheduling-algorithms.pdf)).
 
 - **Derivation of Lower Bounds:** Formulated the theoretical lower bound for access time using partial derivatives to optimize replica frequencies.
 - **Complexity Management:** ADDRESSED the $2^n$ state-space explosion of compound queries by reducing them to "Extended Query Profiles."
