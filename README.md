@@ -10,6 +10,32 @@ This repository contains the implementation and simulation framework for **Query
 
 Originally developed for my Master's Thesis, this project addresses the **NP-hard problem** of mapping compound data requests ("Query Sets") onto limited broadcast channels to minimize average access latency. The core logic involves optimizing data placement and replication under strict resource constraints—a problem class sharing significant mathematical isomorphism with **QUBO (Quadratic Unconstrained Binary Optimization)** and **Job-Shop Scheduling** problems often targeted by modern quantum annealing and QAOA approaches.
 
+### 🧮 Mathematical Modeling: Optimal Replication Strategy (Lemma 3 and Equation 4.15.)
+
+To minimize the global average access time across all query sets, I derived the optimal replication factor using partial derivatives (Lagrange optimization).
+
+**Theorem:** The optimal number of replicas $x$ for any two query sets $q_a$ and $q_b$ must satisfy the ratio of the square root of their access probability $P$ normalized by their size $n$:
+
+$$\frac{x_{a}}{x_{b}} = \frac{\sqrt{P_{a}/n_{a}}}{\sqrt{P_{b}/n_{b}}}$$
+
+This derivation allows the scheduler to dynamically allocate bandwidth resources proportional to the "popularity density" of the data, ensuring a mathematically optimal throughput.
+
+### 📉 Objective Function (Equation 4.16, the "general equation of the near-optimal average access time")
+
+The core of the QSBS algorithm minimizes the following cost function (Average Access Time $T_{Avg}$), derived for multiple compound data requests in a resource-constrained channel:
+
+$$T_{Avg}(Q) = \frac{1}{2} \left( \sum_{j=1}^{\lambda} \sqrt{P_{j}n_{j}} \right)^{2} + \left( \sum_{j=1}^{\lambda} P_{j}n_{j} - \frac{1}{2} \right)$$
+
+This equation serves as the **theoretical lower bound**, allowing the simulation engine to benchmark the heuristic algorithm's efficiency against the absolute mathematical limit.
+
+### 🔗 Topology Optimization (Coherence Degree, Proposition 1)
+
+The algorithm defines a metric called **Query Distance (QD)** to represent the "coherence degree" of a compound data item.
+
+> **Proposition:** A higher coherence degree (minimizing the scatter of data items $d_i$ across the time spectrum) strictly correlates to lower average access latency.
+
+This is implemented via the **Coherence-Based Scheduling (CBS)** heuristic, which treats the broadcast channel as a topological map, clustering high-correlation data items to minimize user "tuning time."
+
 ## 🚀 Key Algorithms
 
 This project implements and benchmarks three distinct scheduling heuristics:
@@ -65,4 +91,4 @@ While originally applied to wireless networks, the underlying mathematics of thi
 _Algorithm Engineer & Full-Stack Developer_
 [LinkedIn](https://www.linkedin.com/in/dachunglin) | [Email](mailto:overcomerlin@gmail.com)
 
-_"I build systems that solve hard math problems."_
+_"A ranger soaring through the world of algorithms."_
